@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — SHO.</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+
+<div class="bg-grid-static"></div>
+
+<!-- ログイン画面 -->
+<section class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-titlebar">
+      <div class="editor-dots"><span></span><span></span><span></span></div>
+      <span class="editor-filename">login.js</span>
+    </div>
+    <div class="login-body">
+      <p class="login-logo">SHO<span class="dot">.</span></p>
+      <p class="login-sub">// admin access only</p>
+      <form id="loginForm">
+        <div class="field">
+          <label for="loginEmail">email</label>
+          <input type="email" id="loginEmail" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">password</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="loginBtn">
+          <span id="loginBtnText">$ sign in</span>
+        </button>
+        <p class="form-error" id="loginError"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 管理ダッシュボード -->
+<div class="admin-shell" id="adminShell" style="display:none;">
+
+  <div class="admin-mobile-bar">
+    <button class="nav-toggle" id="sidebarToggle" aria-label="メニュー" style="display:flex;"><span></span></button>
+    <span class="sidebar-logo" style="margin:0;">SHO<span class="dot">.</span></span>
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <p class="sidebar-logo">SHO<span class="dot">.</span></p>
+    <p class="sidebar-tag">// dashboard</p>
+    <nav class="sidebar-nav">
+      <button data-panel="qualifications" class="active">qualifications</button>
+      <button data-panel="projects">projects</button>
+      <button data-panel="skills">skills</button>
+    </nav>
+    <div class="sidebar-foot">
+      <a href="index.html" target="_blank" rel="noopener">↗ view site</a>
+      <button id="logoutBtn">sign out</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- Qualifications panel -->
+    <section class="panel active" id="panel-qualifications">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">Qualifications</h1>
+          <p class="admin-count" id="qualCount">0 items</p>
+        </div>
+      </div>
+      <div class="admin-list" id="qualList"></div>
+      <div class="add-panel">
+        <p class="add-panel-title">新しい資格を追加</p>
+        <form id="qualForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="qualName">資格名</label>
+              <input type="text" id="qualName" placeholder="例：ITパスポート" required>
+            </div>
+            <div class="field">
+              <label for="qualStatus">ステータス</label>
+              <input type="text" id="qualStatus" placeholder="例：Challenge / 取得" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Qualification</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Projects panel -->
+    <section class="panel" id="panel-projects">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">Projects</h1>
+          <p class="admin-count" id="projectCount">0 items</p>
+        </div>
+      </div>
+      <div class="admin-list" id="projectList"></div>
+      <div class="add-panel">
+        <p class="add-panel-title">新しいプロジェクトを追加</p>
+        <form id="projectForm">
+          <div class="field">
+            <label for="projName">プロジェクト名</label>
+            <input type="text" id="projName" placeholder="例：Price App" required>
+          </div>
+          <div class="field">
+            <label for="projDesc">説明</label>
+            <textarea id="projDesc" placeholder="例：暗号資産の価格を表示するWebアプリ。" required></textarea>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="projTech">使用技術（カンマ区切り）</label>
+              <input type="text" id="projTech" placeholder="HTML, CSS, JavaScript" required>
+            </div>
+            <div class="field">
+              <label for="projUrl">URL</label>
+              <input type="url" id="projUrl" placeholder="https://..." required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Project</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Skills panel -->
+    <section class="panel" id="panel-skills">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">Skills</h1>
+          <p class="admin-count" id="skillCount">0 items</p>
+        </div>
+      </div>
+      <div class="skill-admin-cloud" id="skillAdminCloud"></div>
+      <div class="add-panel">
+        <p class="add-panel-title">新しいスキルを追加</p>
+        <form id="skillForm" class="inline-form">
+          <input type="text" id="skillName" placeholder="例：Python" required>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- 編集モーダル -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <p class="modal-title" id="editModalTitle">編集</p>
+    <form id="editForm"></form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
