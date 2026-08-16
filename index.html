@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHO. — Technology × Creating</title>
+<meta name="description" content="IT・プログラミングを使って、思いついたものを実際に作っているポートフォリオサイトです。">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">SHO<span class="dot">.</span><span class="cursor-blink"></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">home</a></li>
+      <li><a href="#qualifications">qualifications</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="editor-window">
+    <div class="editor-titlebar">
+      <div class="editor-dots"><span></span><span></span><span></span></div>
+      <span class="editor-filename">profile.js</span>
+    </div>
+    <div class="editor-body">
+      <div class="editor-linenos" id="editorLinenos"></div>
+      <pre class="editor-code" id="editorCode"></pre>
+    </div>
+    <div class="hero-result" id="heroResult">
+      <p class="hero-result-label">// output</p>
+      <h1 class="hero-name">SHO<span class="dot">.</span></h1>
+      <p class="hero-tagline">Technology × Creating</p>
+      <p class="hero-desc">IT・プログラミングを使って、思いついたものを実際に作っています。</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#skills" class="btn btn-ghost">See Skills</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="qualifications">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="prompt-line"><span class="prompt-sign">$</span><span class="prompt-cmd">cat qualifications.json</span></p>
+      <h2 class="section-title">資格・挑戦中の学び</h2>
+      <p class="section-sub">取得済み・挑戦中の資格をまとめています。</p>
+    </div>
+    <div class="qual-grid" id="qualGrid">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="prompt-line"><span class="prompt-sign">$</span><span class="prompt-cmd">ls ./projects</span></p>
+      <h2 class="section-title">作ったもの</h2>
+      <p class="section-sub">これまでに開発したWebアプリ・プログラムです。</p>
+    </div>
+    <div class="project-grid" id="projectGrid">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="prompt-line"><span class="prompt-sign">$</span><span class="prompt-cmd">skills --list</span></p>
+      <h2 class="section-title">使える技術</h2>
+      <p class="section-sub">現在扱える言語・フレームワーク・ツールです。</p>
+    </div>
+    <div class="skill-cloud reveal" id="skillCloud">
+      <div class="skeleton" style="width:100%;min-height:50px;"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-prompt"><span class="prompt-sign">sho@portfolio</span><span class="prompt-path"> ~ % </span>&copy; <span id="year"></span></p>
+    <a href="admin.html" class="footer-admin-link">./admin</a>
+  </div>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
