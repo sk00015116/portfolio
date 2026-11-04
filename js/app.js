@@ -1,4 +1,75 @@
-import { supabase } from './supabase-client.js';
+// ==========================================================================
+// Portfolio data (static)
+//
+// Supabaseプロジェクトが停止しても内容が必ず表示されるように、
+// データを定数として直接持たせている。Supabase運用に戻す場合は
+// loadQualifications / loadProjects / loadSkills 内を書き換えればOK。
+// ==========================================================================
+
+const QUALIFICATIONS = [
+  { name: '生成AIパスポート', status: '取得済み' },
+  { name: 'G検定（ジェネラリスト検定）', status: '学習中' },
+  { name: '基本情報技術者試験', status: '挑戦中' },
+];
+
+const PROJECTS = [
+  {
+    name: 'StudyClock',
+    description: '机の上に置いて使える、オフライン対応の学習タイマー＆PWA時計。フレームワークなしのVanilla JSで軽量実装。',
+    tech: 'JavaScript, HTML5, CSS3, PWA, LocalStorage',
+    url: 'https://sk00015116.github.io/studyclock/public/',
+  },
+  {
+    name: 'LOCAL-AI-1',
+    description: 'WebLLMを活用し、ブラウザ上で完全オフライン稼働するローカルAIチャット。Qwen2.5やSmolLM2を端末GPUで直接実行。',
+    tech: 'WebGPU, WebLLM, Qwen2.5, JavaScript',
+    url: 'https://sk00015116.github.io/LOCAL-AI-1/',
+  },
+  {
+    name: 'FilePort',
+    description: 'Supabase Storageを活用し、学校のタブレットとPC間で教材や単語帳をURL1つで安全に送受信できるファイル転送アプリ。',
+    tech: 'JavaScript, Supabase, Storage, HTML5',
+    url: 'https://sk00015116.github.io/FilePort11/docs/',
+  },
+  {
+    name: 'gas-price-map',
+    description: 'LeafletとOpenStreetMapを活用し、神奈川・湘南エリアを中心としたガソリンスタンドの価格情報を可視化・投稿できるマップアプリ。',
+    tech: 'JavaScript, Leaflet, OpenStreetMap, CSS3',
+    url: 'https://sk00015116.github.io/gas-price-map/',
+  },
+  {
+    name: 'price-app',
+    description: 'CoinGecko APIを活用し、ビットコインやイーサリアムの日本円価格を10秒ごとに自動更新・チャート描画するリアルタイム相場アプリ。',
+    tech: 'JavaScript, CoinGecko API, Canvas, CSS3',
+    url: 'https://sk00015116.github.io/price-app/',
+  },
+  {
+    name: 'VoxNote',
+    description: 'Web Speech APIによる音声認識とIndexedDBを活用し、音声を録音・文字起こししてブラウザ内に保存するボイスメモアプリ。',
+    tech: 'Web Speech API, MediaRecorder, IndexedDB, JavaScript',
+    url: 'https://sk00015116.github.io/VoxNote/',
+  },
+  {
+    name: 'family-wallet',
+    description: '平塚市の地域電子通貨「ひらつか☆スターライトマネー」の家族間残高をブラウザ上で手軽に管理・記録できるツール。',
+    tech: 'JavaScript, LocalStorage, HTML5, CSS3',
+    url: 'https://sk00015116.github.io/family-wallet/',
+  },
+];
+
+const SKILLS = [
+  'HTML5',
+  'CSS3',
+  'JavaScript',
+  'Claude / 生成AI',
+  'WebGPU',
+  'WebLLM',
+  'Supabase',
+  'Git / GitHub',
+  'Leaflet',
+  'REST API',
+  'PWA',
+];
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -44,13 +115,6 @@ function escapeHTML(str) {
   const div = document.createElement('div');
   div.textContent = str ?? '';
   return div.innerHTML;
-}
-
-function emptyState(text) {
-  const div = document.createElement('div');
-  div.className = 'empty-state';
-  div.textContent = `// ${text}`;
-  return div;
 }
 
 /* ---------- Hero typewriter ---------- */
@@ -130,27 +194,11 @@ function colorForIndex(i) {
 }
 
 /* ---------- Qualifications ---------- */
-async function loadQualifications() {
+function loadQualifications() {
   const grid = document.getElementById('qualGrid');
-  const { data, error } = await supabase
-    .from('qualifications')
-    .select('*')
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: true });
-
   grid.innerHTML = '';
 
-  if (error) {
-    console.error(error);
-    grid.appendChild(emptyState('資格データを読み込めませんでした'));
-    return;
-  }
-  if (!data || data.length === 0) {
-    grid.appendChild(emptyState('まだ資格が登録されていません'));
-    return;
-  }
-
-  data.forEach((q, i) => {
+  QUALIFICATIONS.forEach((q, i) => {
     const tone = toneForStatus(q.status);
     const card = document.createElement('div');
     card.className = 'qual-card';
@@ -167,27 +215,11 @@ async function loadQualifications() {
 }
 
 /* ---------- Projects ---------- */
-async function loadProjects() {
+function loadProjects() {
   const grid = document.getElementById('projectGrid');
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: true });
-
   grid.innerHTML = '';
 
-  if (error) {
-    console.error(error);
-    grid.appendChild(emptyState('プロジェクトを読み込めませんでした'));
-    return;
-  }
-  if (!data || data.length === 0) {
-    grid.appendChild(emptyState('まだプロジェクトが登録されていません'));
-    return;
-  }
-
-  data.forEach((p, i) => {
+  PROJECTS.forEach((p, i) => {
     const techList = (p.tech || '').split(',').map((t) => t.trim()).filter(Boolean);
 
     const card = document.createElement('div');
@@ -211,30 +243,14 @@ async function loadProjects() {
 }
 
 /* ---------- Skills ---------- */
-async function loadSkills() {
+function loadSkills() {
   const cloud = document.getElementById('skillCloud');
-  const { data, error } = await supabase
-    .from('skills')
-    .select('*')
-    .order('sort_order', { ascending: true })
-    .order('created_at', { ascending: true });
-
   cloud.innerHTML = '';
 
-  if (error) {
-    console.error(error);
-    cloud.appendChild(emptyState('スキルを読み込めませんでした'));
-    return;
-  }
-  if (!data || data.length === 0) {
-    cloud.appendChild(emptyState('まだスキルが登録されていません'));
-    return;
-  }
-
-  data.forEach((s, i) => {
+  SKILLS.forEach((name, i) => {
     const tag = document.createElement('span');
     tag.className = 'skill-tag';
-    tag.innerHTML = `<span class="dot" style="background:${TAG_HEX[colorForIndex(i)]}"></span>${escapeHTML(s.name)}`;
+    tag.innerHTML = `<span class="dot" style="background:${TAG_HEX[colorForIndex(i)]}"></span>${escapeHTML(name)}`;
     cloud.appendChild(tag);
   });
 }
