@@ -32,12 +32,6 @@ const PROJECTS = [
     url: 'https://sk00015116.github.io/FilePort11/docs/',
   },
   {
-    name: 'gas-price-map',
-    description: 'LeafletとOpenStreetMapを活用し、神奈川・湘南エリアを中心としたガソリンスタンドの価格情報を可視化・投稿できるマップアプリ。',
-    tech: 'JavaScript, Leaflet, OpenStreetMap, CSS3',
-    url: 'https://sk00015116.github.io/gas-price-map/',
-  },
-  {
     name: 'price-app',
     description: 'CoinGecko APIを活用し、ビットコインやイーサリアムの日本円価格を10秒ごとに自動更新・チャート描画するリアルタイム相場アプリ。',
     tech: 'JavaScript, CoinGecko API, Canvas, CSS3',
@@ -48,12 +42,6 @@ const PROJECTS = [
     description: 'Web Speech APIによる音声認識とIndexedDBを活用し、音声を録音・文字起こししてブラウザ内に保存するボイスメモアプリ。',
     tech: 'Web Speech API, MediaRecorder, IndexedDB, JavaScript',
     url: 'https://sk00015116.github.io/VoxNote/',
-  },
-  {
-    name: 'family-wallet',
-    description: '平塚市の地域電子通貨「ひらつか☆スターライトマネー」の家族間残高をブラウザ上で手軽に管理・記録できるツール。',
-    tech: 'JavaScript, LocalStorage, HTML5, CSS3',
-    url: 'https://sk00015116.github.io/family-wallet/',
   },
 ];
 
