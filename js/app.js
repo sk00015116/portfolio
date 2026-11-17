@@ -17,7 +17,7 @@ const PROJECTS = [
     name: 'StudyClock',
     description: '机の上に置いて使える、オフライン対応の学習タイマー＆PWA時計。フレームワークなしのVanilla JSで軽量実装。',
     tech: 'JavaScript, HTML5, CSS3, PWA, LocalStorage',
-    url: 'https://sk00015116.github.io/studyclock/public/',
+    url: 'https://shok5160-cell.github.io/studyclock/public/',
   },
   {
     name: 'LOCAL-AI-1',
